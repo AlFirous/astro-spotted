@@ -1,6 +1,6 @@
 [Download for Chrome](https://chromewebstore.google.com/detail/blog-quest/ghmfhadmoephkndjiahchiobgclmkkpi)
 
-[Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/TODO/)
+[Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/blog-quest/)
 
 # Blog Quest
 
