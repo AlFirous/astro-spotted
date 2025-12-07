@@ -52,7 +52,7 @@ See build.md, test.md, and release.md to develop this extension.
 
 ## Launch post
 
-[This blog post](TODO) announces the launch of this extension.
+[This blog post](https://alexsci.com/blog/calm-tech-discover/) announces the launch of this extension.
 
 
 ## Fork of StreetPass for Mastodon
