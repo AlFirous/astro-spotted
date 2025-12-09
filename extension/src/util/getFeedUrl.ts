@@ -7,15 +7,15 @@ export function getFeedUrl(
   feedUrlScheme: string | undefined,
 ): string {
   if (!feedUrlScheme) {
-    // Download the feed
-    return feed.feedUrl;
+    // Open the Astro site
+    return feed.siteUrl;
   }
 
   let returnUrl = feedUrlScheme;
   if (returnUrl.includes("{feedUrl}")) {
-    returnUrl = feed.feedUrl
-      ? returnUrl.replaceAll("{feedUrl}", `${feed.feedUrl}`)
-      : feed.feedUrl;
+    returnUrl = feed.siteUrl
+      ? returnUrl.replaceAll("{feedUrl}", `${feed.siteUrl}`)
+      : feed.siteUrl;
   }
 
   return returnUrl;

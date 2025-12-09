@@ -31,7 +31,7 @@ export function getConfig(
     return args[target];
   }
 
-  const extensionName = `Blog Quest${
+  const extensionName = `Astro Spotted${
     config.mode === "dev"
       ? ` ${new Intl.DateTimeFormat(undefined, {
           month: "short",
@@ -55,8 +55,8 @@ export function getConfig(
             manifest_version: targets({ chrome: 3, firefox: 2, safari: 3 }),
             name: extensionName,
             version: VERSION,
-            description: "Collect Blogs and RSS feeds as you browse",
-            homepage_url: "https://github.com/robalexdev/blog-quest",
+            description: "Detect and collect websites built with Astro",
+            homepage_url: "https://github.com/AlFirous/astro-spotted",
             permissions: ["storage"],
             content_scripts: [
               {
@@ -81,7 +81,7 @@ export function getConfig(
             ...(() => {
               const action: Manifest.ActionManifest = {
                 default_popup: "src/popup.html",
-                default_title: "Blog Quest",
+                default_title: "Astro Spotted",
                 default_icon: targets<Record<string, string>>({
                   chrome: actionInactive,
                   firefox: actionInactive,

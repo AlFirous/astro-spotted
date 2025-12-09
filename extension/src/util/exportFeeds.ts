@@ -25,31 +25,24 @@ export async function exportFeeds(): Promise<void> {
 
   let xmlHeadTitle = xmlDoc.createElement("title");
   xmlHead.appendChild(xmlHeadTitle);
-  xmlHeadTitle.appendChild(xmlDoc.createTextNode("Exported from Blog Quest"));
+  xmlHeadTitle.appendChild(xmlDoc.createTextNode("Exported from Astro Spotted"));
 
   let xmlHeadDescription = xmlDoc.createElement("description");
   xmlHead.appendChild(xmlHeadDescription);
-  xmlHeadDescription.appendChild(xmlDoc.createTextNode("These feeds were collected by the Blog Quest browser extension"));
+  xmlHeadDescription.appendChild(xmlDoc.createTextNode("These Astro sites were collected by the Astro Spotted browser extension"));
 
   let xmlBody = xmlDoc.createElement("body");
   xmlDoc.children[0].appendChild(xmlBody);
 
-  for (const feed of feeds) {
+  for (const site of feeds) {
     let xmlOutline = xmlDoc.createElement("outline");
-    // Even when the feed is an Atom feed, "rss" appears to be the correct value
-    xmlOutline.setAttribute("type", "rss");
-    xmlOutline.setAttribute("text", escapeXml(feed.feedData.feedTitle));
-    xmlOutline.setAttribute("xmlUrl", escapeXml(feed.feedHref));
-
-    // TODO: this really should be the website URL linked in
-    // the body of the RSS feed, or perhaps the base URL of
-    // the blog
-    // Is there a good way to do that here?
-    xmlOutline.setAttribute("htmlUrl", escapeXml(feed.websiteUrl));
-
-    xmlOutline.setAttribute("category", "all");
+    xmlOutline.setAttribute("type", "link");
+    xmlOutline.setAttribute("text", escapeXml(site.feedData.siteName || site.feedData.siteUrl));
+    xmlOutline.setAttribute("url", escapeXml(site.feedHref));
+    xmlOutline.setAttribute("htmlUrl", escapeXml(site.websiteUrl));
+    xmlOutline.setAttribute("category", "astro");
     xmlBody.appendChild(xmlOutline);
-    console.log(feed);
+    console.log(site);
   }
 
   const xmlstr = (new XMLSerializer()).serializeToString(xmlDoc);

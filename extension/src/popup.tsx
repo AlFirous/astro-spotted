@@ -58,7 +58,7 @@ function Popup() {
         <img src="/icon-128.png" width="36" height="36" />
 
         <h1 className="text-14 font-medium leading-[1.21] text-primaryText">
-          Blog Quest
+          Astro Spotted
         </h1>
       </div>
 
@@ -98,7 +98,7 @@ function Popup() {
         {hrefStoreQuery.data?.feeds.length === 0 && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center peer-open:hidden">
             <p className="pointer-events-auto text-13 text-secondaryText">
-              No feeds
+              No Astro sites
               {hrefStoreQuery.data.hiddenFeeds.length === 0 && (
                 <>
                   . Try{" "}
@@ -424,7 +424,7 @@ function ConfirmButton(
 }
 
 function Feeds(props: {
-  feeds: Array<HrefDataType<"feed">> | undefined;
+  feeds: Array<HrefDataType<"astroSite">> | undefined;
   hideFeeds: boolean;
 }) {
   return props.feeds?.map((hrefData, index, arr) => {
@@ -434,8 +434,8 @@ function Feeds(props: {
       : new Date().getDate();
     const previousItemWasDayBefore =
       prevHrefDate !== new Date(hrefData.viewedAt).getDate();
-    const feedHrefProps = getHrefProps(
-      hrefData.feedData.feedUrl,
+    const siteHrefProps = getHrefProps(
+      hrefData.feedData.siteUrl,
       async () => {
         const [feedUrlScheme, hideFeedsOnClick] = await Promise.all([
           queryClient.fetchQuery(useFeedUrlSchemeQuery.getFetchOptions()),
@@ -456,9 +456,9 @@ function Feeds(props: {
         return getFeedUrl(hrefData.feedData, feedUrlScheme);
       },
     );
-    const feedDisplayName = hrefData.feedData.feedTitle
-      ? `${hrefData.feedData.feedTitle}`
-      : getDisplayHref(hrefData.feedData.feedUrl);
+    const siteDisplayName = hrefData.feedData.siteName
+      ? `${hrefData.feedData.siteName}`
+      : getDisplayHref(hrefData.feedData.siteUrl);
 
     return (
       <React.Fragment key={`${index}.${hrefData.feedHref}`}>
@@ -476,9 +476,9 @@ function Feeds(props: {
           className="flex items-start"
         >
           <a
-            {...feedHrefProps}
+            {...siteHrefProps}
             className="flex shrink-0 pr-[7px] pt-[4px]"
-            title={feedDisplayName}
+            title={siteDisplayName}
           >
             <div className="relative flex size-[19px] shrink-0 overflow-hidden rounded-full">
               {hrefData.feedData.favicon ? (
@@ -512,11 +512,11 @@ function Feeds(props: {
           <div className="flex min-w-0 grow flex-col">
             <div className="flex items-baseline justify-between gap-x-6 leading-[1.45]">
               <a
-                {...feedHrefProps}
+                {...siteHrefProps}
                 className="overflow-hidden text-ellipsis whitespace-nowrap text-[13px] font-medium text-accent"
-                title={feedDisplayName}
+                title={siteDisplayName}
               >
-                {feedDisplayName}
+                {siteDisplayName}
               </a>
 
               {!props.hideFeeds && (

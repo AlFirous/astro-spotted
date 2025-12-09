@@ -16,44 +16,35 @@ export const messageCallbacks: {
   [K in keyof ArgMap]: (value: ArgMap[K]) => z.infer<(typeof MessageReturn)[K]>;
 } = {
   async HREF_PAYLOAD(args) {
-    if (!getIsUrlHttpOrHttps(args.feedHref)) {
+    if (!getIsUrlHttpOrHttps(args.siteHref)) {
       return;
     }
 
     const hasExistingHrefData = (
       await getHrefStore((prev) => {
         const hrefStore = new Map(prev);
-        // streetpass would expire known non-profiles here
-        // but we don't fetch the feed, so there's nothing to expire
         return hrefStore;
       })
-    ).has(args.feedHref);
+    ).has(args.siteHref);
 
     if (hasExistingHrefData) {
       return;
     }
 
-    //
-    // Unlike Mastodon and Webfinger we can't reliably fetch RSS feed content in an extension
-    // CORS can reject it
-    // Instead rely on the information in the rel=alternate link
-    //
-
-    const feedData = {
-      type: "feed",
-      feedTitle: args.feedTitle,
-      feedUrl: args.feedHref,
-      // tabUrl too?
+    const siteData = {
+      type: "astroSite",
+      siteName: args.siteName,
+      siteUrl: args.siteHref,
       favicon: args.faviconHref,
     };
 
     await getHrefStore((hrefStore) => {
       const newHrefStore = new Map(hrefStore);
-      newHrefStore.set(args.feedHref, {
-        feedData: feedData,
+      newHrefStore.set(args.siteHref, {
+        feedData: siteData,
         viewedAt: Date.now(),
         websiteUrl: args.tabUrl,
-        feedHref: args.feedHref,
+        feedHref: args.siteHref,
       });
 
       return newHrefStore;

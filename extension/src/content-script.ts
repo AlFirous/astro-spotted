@@ -37,28 +37,25 @@ function normalizeHref(url) {
   return '';
 }
 
-function processFeed(feed, iconHref) {
-  let feedHref = normalizeHref(feed.getAttribute("href"));
+function processAstroSite(astroMeta, iconHref) {
+  // Astro sites are identified by the presence of the astro generator meta tag
+  let websiteHref = normalizeHref(currentUrlSanitized);
 
-  if (feedHref && !hrefs.has(feedHref)) {
-    hrefs.add(feedHref);
-    let feedTitle = feed.getAttribute('title');
-    if (! feedTitle) {
-      // Fallback: use the page title
-      feedTitle = document.title;
-    }
+  if (websiteHref && !hrefs.has(websiteHref)) {
+    hrefs.add(websiteHref);
+    let siteName = document.querySelector('meta[property="og:title"]')?.getAttribute('content') || document.title;
 
     const message: Message = {
       name: "HREF_PAYLOAD",
       args: {
         faviconHref: iconHref,
-        feedHref: feedHref,
-        feedTitle: feedTitle,
+        siteHref: websiteHref,
+        siteName: siteName,
         tabUrl: currentUrlSanitized,
       },
     };
     browser.runtime.sendMessage(message);
-    console.log('RSS content script');
+    console.log('Astro site detected');
     console.log(message);
   }
 }
@@ -71,16 +68,10 @@ function sendHrefs() {
       iconHref = normalizeHref(icons[0].getAttribute("href"));
   }
 
-  // Process RSS feeds
-  let feeds = document.querySelectorAll(":is(link)[href][type~='application/rss+xml'][rel~='alternate']");
-  for (const feed of feeds) {
-    processFeed(feed, iconHref);
-  }
-
-  // Process Atom feeds
-  feeds = document.querySelectorAll(":is(link)[href][type~='application/atom+xml'][rel~='alternate']");
-  for (const feed of feeds) {
-    processFeed(feed, iconHref);
+  // Detect Astro sites via generator meta tag
+  const astroMeta = document.querySelector('meta[name="generator"][content*="Astro"]');
+  if (astroMeta) {
+    processAstroSite(astroMeta, iconHref);
   }
 }
 

@@ -4,11 +4,11 @@ import { HrefDataType, HrefStore } from "./constants";
 export function getFeeds(
   hrefStore: DeepReadonly<HrefStore>,
   options?: { hidden?: boolean },
-): Array<HrefDataType<"feed">> {
-  const feeds: Array<HrefDataType<"feed">> = [];
+): Array<HrefDataType<"astroSite">> {
+  const sites: Array<HrefDataType<"astroSite">> = [];
 
   for (const hrefData of hrefStore.values()) {
-    if (hrefData.feedData.type !== "feed") {
+    if (hrefData.feedData.type !== "astroSite") {
       continue;
     }
 
@@ -16,11 +16,11 @@ export function getFeeds(
       continue;
     }
 
-    feeds.push({
+    sites.push({
       ...hrefData,
       feedData: hrefData.feedData,
     });
   }
 
-  return feeds.sort((a, b) => b.viewedAt - a.viewedAt);
+  return sites.sort((a, b) => b.viewedAt - a.viewedAt);
 }

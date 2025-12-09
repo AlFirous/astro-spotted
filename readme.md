@@ -1,63 +1,57 @@
-[Download for Chrome](https://chromewebstore.google.com/detail/blog-quest/ghmfhadmoephkndjiahchiobgclmkkpi)
+[Download for Chrome](https://chromewebstore.google.com/detail/astro-spotted)
 
-[Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/blog-quest/)
+[Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/astro-spotted/)
 
-# Blog Quest
+# Astro Spotted
 
-Blog Quest is a browser extension that helps you collect RSS and Atom feeds as you browse. Here's how it works:
+Astro Spotted is a browser extension that helps you discover and collect websites built with Astro. Here's how it works:
 
-1. Blogs link to their RSS feeds using [`rel="alternate"` links](https://www.rssboard.org/rss-autodiscovery#element-link)
-2. Blog Quest quietly collects these feed URLs as you browse
-3. Browse the web as usual. Blog Quest will build a collection of blogs as you go.
+1. Websites built with Astro include a generator meta tag in their HTML
+2. Astro Spotted quietly detects these sites as you browse
+3. Browse the web as usual. Astro Spotted will build a collection of Astro-powered sites as you go.
 
 
-![Screenshot of Blog Quest pop-up showing list of discovered feeds](assets/blog-quest-screenshot.png)
+![Screenshot of Astro Spotted pop-up showing list of discovered Astro sites](assets/astro-spotted-screenshot.png)
 
 
 ## Features
 
-Once installed Blog Quest will collect RSS and Atom feeds from each page you visit.
-Click on the extension to open the pop-up, which shows the list of collected feeds.
+Once installed Astro Spotted will detect and collect websites built with Astro as you visit them.
+Click on the extension to open the pop-up, which shows the list of collected Astro sites.
 
-At the top right you can open the `...` menu to customize Blog Quest.
+At the top right you can open the `...` menu to customize Astro Spotted.
 
-### OPML export
+### Export collection
 
-Many feed readers support import using the OPML format.
-If you'd like to import every feed you've discovered, you can use this export feature.
+You can export your discovered Astro sites in a structured format.
+If you'd like to save or share your collection, you can use this export feature.
 
 
-### Subscribe
+### Open with custom handler
 
-The "Subscribe Using" feature allows you to choose how feeds are opened.
-The default (empty string) will open or download the feed.
-Presets allow you to quickly integrate using Feedly, FeedLand, and Inoreader.
+The "Open With…" feature allows you to choose how Astro sites are opened.
+The default (empty string) will open the Astro site in a new tab.
+You can set custom handlers to integrate with other tools.
 
-If you use a different feed reader you can try integrating yourself.
-The subscription URL is a template that replaces `{feedUrl}` with the RSS or Atom feed's URL.
-For example: `https://example.com/subscribe?url={feedUrl}`.
-Consider sharing your URL template, I'll add it as a new preset.
+If you use a different handler you can try integrating yourself.
+The URL is a template that replaces `{feedUrl}` with the Astro site's URL.
+For example: `https://example.com/?site={feedUrl}`.
 
 
 ## Calm tech features
 
-Blog Quest doesn't compete for your attention.
-The extension quietly collects feeds, allowing you to explore them when you are ready.
+Astro Spotted doesn't compete for your attention.
+The extension quietly collects Astro sites, allowing you to explore them when you are ready.
 
 
 ## Additional docs
 
-See build.md, test.md, and release.md to develop this extension.
-
-
-## Launch post
-
-[This blog post](https://alexsci.com/blog/calm-tech-discover/) announces the launch of this extension.
+See build.md, test.md, and changelog.md to develop this extension.
 
 
 ## Fork of StreetPass for Mastodon
 
-This project builds on the wonderful [StreetPass for Mastodon](https://github.com/tvler/streetpass) browser extension, changing the focus to RSS feeds.
+This project builds on the wonderful [StreetPass for Mastodon](https://github.com/tvler/streetpass) browser extension, adapting it to detect Astro-powered websites.
 
 
 ## License
@@ -69,7 +63,7 @@ Consistent with the StreetPass license, this project is open-source under the MI
 
 **Nothing leaves your device**
 
-Blog Quest runs entirely in your browser and will never collect analytics.
-This means that Blog Quest doesn't require any sort of server being up-and-running for you to use it.
+Astro Spotted runs entirely in your browser and will never collect analytics.
+This means that Astro Spotted doesn't require any sort of server being up-and-running for you to use it.
 Once installed, it's yours forever.
 

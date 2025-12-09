@@ -3,9 +3,9 @@ import { z } from "zod";
 export type MaybePromise<T> = Promise<T> | T;
 
 export const Feed = z.object({
-  type: z.literal("feed"),
-  feedUrl: z.string(),
-  feedTitle: z.optional(z.union([z.string(), z.undefined()])),
+  type: z.literal("astroSite"),
+  siteUrl: z.string(),
+  siteName: z.optional(z.union([z.string(), z.undefined()])),
   favicon: z.optional(z.union([z.string(), z.undefined()])),
 });
 
@@ -16,8 +16,8 @@ export const Message = z.discriminatedUnion("name", [
     name: z.literal("HREF_PAYLOAD"),
     args: z.object({
       faviconHref: z.string(),
-      feedHref: z.string(),
-      feedTitle: z.string(),
+      siteHref: z.string(),
+      siteName: z.string(),
       tabUrl: z.string(),
     }),
   }),
